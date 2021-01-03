@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rk.cleanarchitecturekotlin.data.local.dao.MovieDao
 import com.rk.cleanarchitecturekotlin.data.local.entity.MovieEntity
+import com.rk.cleanarchitecturekotlin.utils.Constatnts
 
 @Database(entities = [MovieEntity::class], version = 2, exportSchema = false)
 abstract class MovieDataBase:RoomDatabase() {
@@ -28,7 +29,7 @@ abstract class MovieDataBase:RoomDatabase() {
 
         private fun buildDatabase(context: Context): MovieDataBase {
             return Room.databaseBuilder(context,
-                MovieDataBase::class.java,"users.db").allowMainThreadQueries().build()
+                MovieDataBase::class.java,Constatnts.DB_NAME).allowMainThreadQueries().build()
 
         }
     }

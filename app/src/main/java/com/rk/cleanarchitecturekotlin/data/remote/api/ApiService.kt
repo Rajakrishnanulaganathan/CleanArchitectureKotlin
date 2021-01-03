@@ -12,7 +12,6 @@ interface ApiService {
     @GET("movie/popular")
     suspend fun getPopularMovieResults(@Query("api_key") apikey: String?): Response<MovieResponse>
 
-
     @GET("/3/movie/{movieId}")
     suspend fun fetchMovieDetail(@Path("movieId") movieId: String?): Response<MovieEntity>
 }

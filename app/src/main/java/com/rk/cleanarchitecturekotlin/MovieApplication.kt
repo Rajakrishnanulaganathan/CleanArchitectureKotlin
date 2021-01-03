@@ -12,7 +12,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class MovieApplication :Application(),HasAndroidInjector {
+class MovieApplication : Application(), HasAndroidInjector {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -22,7 +22,7 @@ class MovieApplication :Application(),HasAndroidInjector {
 
     override fun onCreate() {
         super.onCreate()
-// Initialize Dependency Injection
+        // Initialize Dependency Injection
         DaggerApiComponent.builder()
             .create(this)
             .build()

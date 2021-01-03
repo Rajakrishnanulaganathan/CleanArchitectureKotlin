@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertmovies(movieEntity: List<MovieEntity?>?): LongArray?
+    fun insertMovies(movieEntity: List<MovieEntity?>?): LongArray?
 
     @Query("select * from movies")
-    fun getallmovies(): Flow<List<MovieEntity>>
+    fun getAllMovies(): Flow<List<MovieEntity>>
 
     @Query("select * from movies where original_title=:id")
-     fun getmovie(id: String): Flow<MovieEntity>
+    fun getMovie(id: String): Flow<MovieEntity>
 }
