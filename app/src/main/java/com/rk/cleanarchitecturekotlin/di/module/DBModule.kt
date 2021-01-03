@@ -8,6 +8,7 @@ import javax.inject.Singleton
 
 @Module
 class DBModule {
+
     @Provides
     @Singleton
     fun getMovieDatabase(app:Application): MovieDataBase {
