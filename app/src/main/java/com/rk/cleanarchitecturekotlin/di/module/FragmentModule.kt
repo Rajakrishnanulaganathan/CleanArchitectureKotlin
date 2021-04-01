@@ -1,7 +1,7 @@
 package com.rk.cleanarchitecturekotlin.di.module
 
 import com.rk.cleanarchitecturekotlin.ui.MovieFragment
-import com.rk.cleanarchitecturekotlin.ui.Moviedetailsfragment
+import com.rk.cleanarchitecturekotlin.ui.MovieDetailsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -12,5 +12,5 @@ abstract class FragmentModule {
     abstract fun moviefragment():MovieFragment
 
     @ContributesAndroidInjector
-    abstract fun  movieDetailFragment(): Moviedetailsfragment
+    abstract fun  movieDetailFragment(): MovieDetailsFragment
 }

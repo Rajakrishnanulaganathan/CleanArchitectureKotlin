@@ -12,16 +12,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
-import java.util.*
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    private val moviedao:MovieDao,
+    private val movieDao:MovieDao,
     private val apiService: ApiService
 ) {
 
 
-    fun getAllpopularmovies(): Flow<State<List<MovieEntity>>> {
+    fun getAllPopularMovies(): Flow<State<List<MovieEntity>>> {
         return object : NetworkBoundRepository<List<MovieEntity> , MovieResponse>(),
             Flow<State<MovieResponse>> {
             var movieEntities: MutableList<MovieEntity> = mutableListOf<MovieEntity>()
@@ -37,11 +36,11 @@ class MovieRepository @Inject constructor(
 
 
 
-               moviedao.insertmovies(movieEntities)
+               movieDao.insertMovies(movieEntities)
             }
 
             override fun fetchFromLocal(): Flow<List<MovieEntity>> {
-               return moviedao.getallmovies()
+               return movieDao.getAllMovies()
             }
 
             override suspend fun fetchFromRemote(): Response<MovieResponse> {
@@ -54,7 +53,7 @@ class MovieRepository @Inject constructor(
         }.asFlow().flowOn(Dispatchers.IO)
     }
 
-    fun getAllpopularmoviesDetails(id:String): Flow<MovieEntity> {
-       return moviedao.getmovie(id)
+    fun getAllPopularMoviesDetails(id:String): Flow<MovieEntity> {
+       return movieDao.getMovie(id)
     }
 }

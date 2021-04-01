@@ -28,29 +28,15 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun providegson(): Gson {
-      val gsonBuilder = GsonBuilder()
-        return gsonBuilder.create()
-    }
+    fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
     @Singleton
-    fun provideCache(application: Application):Cache{
-        val cachesize:Long= 10 * 1024 * 1024
-        val httpCacheDirectory =File(application.getCacheDir(), "http-cache")
-        val cache =Cache(httpCacheDirectory,cachesize)
-        return cache
-    }
+    fun provideCache(application: Application) = Cache(File(application.getCacheDir(), "http-cache"),10 * 1024 * 1024)
 
     @Provides
     @Singleton
-    fun provideNetworkInterceptor(app:Application): NetworkInterceptor {
-        val interceptor: NetworkInterceptor =
-            NetworkInterceptor(
-                app.applicationContext
-            )
-        return interceptor
-    }
+    fun provideNetworkInterceptor(app:Application): NetworkInterceptor = NetworkInterceptor(app.applicationContext)
 
     @Provides
     @Singleton
@@ -69,10 +55,9 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(gson:Gson,okHttpClient:OkHttpClient):ApiService=Retrofit.Builder().baseUrl(
+    fun provideRetrofit(gson:Gson,okHttpClient:OkHttpClient):ApiService = Retrofit.Builder().baseUrl(
         Constatnts.ENDPOINT).addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson)).client(okHttpClient).build().create(ApiService::class.java)
-
 
 
 }
